@@ -2,6 +2,10 @@
 
 A beautiful, modern time tracking application built with **Tauri** (Rust backend) and **BeerCSS** (Material Design 3 frontend), featuring the **One Dark** color scheme.
 
+## Todo
+
+- Linux script autodetect distro and install package accordingly not bundle all 3 this shall only happen if releasing flang is set
+
 ## Features
 
 - **🎨 One Dark Theme**: Beautiful dark theme inspired by the popular Atom editor theme
@@ -17,11 +21,13 @@ A beautiful, modern time tracking application built with **Tauri** (Rust backend
 ## Tech Stack
 
 ### Backend (Rust)
+
 - **Tauri 2.0**: Secure, lightweight desktop app framework
 - **Serde**: JSON serialization for persistence
 - **Chrono**: Date and time handling
 
 ### Frontend
+
 - **BeerCSS 4.0**: Material Design 3 CSS framework
 - **Vanilla JavaScript**: No framework dependencies
 - **Material Symbols**: Google Material icons
@@ -31,11 +37,13 @@ A beautiful, modern time tracking application built with **Tauri** (Rust backend
 Before building the project, ensure you have the following installed:
 
 1. **Rust** (latest stable version)
+
    ```bash
    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
    ```
 
 2. **Node.js** (v18 or later)
+
    ```bash
    # Using nvm (recommended)
    nvm install 18
@@ -43,6 +51,7 @@ Before building the project, ensure you have the following installed:
    ```
 
 3. **System Dependencies** (Linux only)
+
    ```bash
    # Debian/Ubuntu
    sudo apt update
@@ -61,12 +70,14 @@ Before building the project, ensure you have the following installed:
 ## Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd time-tracker
    ```
 
 2. **Install Node.js dependencies**
+
    ```bash
    npm install
    ```
@@ -116,31 +127,37 @@ time-tracker/
 ## Usage
 
 ### Adding Tasks
+
 1. Enter a task name in the input field
 2. Click "Add Task" or press Enter
 3. The task appears as a card below
 
 ### Time Tracking
+
 - Click the **play button** (▶️) to start tracking time
 - Click the **pause button** (⏸️) to stop tracking
 - Time accumulates across multiple start/stop sessions
 
 ### Managing Tasks
+
 - **Reset**: Click the replay icon to reset a task's time to 00:00:00
 - **Delete**: Click the trash icon to permanently remove a task
 - Both actions require confirmation
 
 ### Exporting Data
+
 1. Click the "Export" button in the header
 2. Choose a location to save the file
 3. Tasks are exported in a readable text format
 
 ### Theme Toggle
+
 - Click the sun/moon icon in the header to switch between dark and light themes
 
 ## Data Storage
 
 Tasks are automatically saved to:
+
 - **Linux**: `~/.config/time_tracker_tauri_data.json`
 - **macOS**: `~/Library/Application Support/time_tracker_tauri_data.json`
 - **Windows**: `%APPDATA%\time_tracker_tauri_data.json`
@@ -150,12 +167,14 @@ Tasks are automatically saved to:
 The application follows a clean separation of concerns:
 
 ### Backend (Rust)
+
 - **Domain Layer** (`task.rs`): Task entity with business logic
 - **Persistence Layer** (`persistence.rs`): File I/O operations
 - **State Management** (`state.rs`): Thread-safe application state
 - **API Layer** (`commands.rs`): Tauri commands for frontend communication
 
 ### Frontend (JavaScript)
+
 - **UI Rendering**: Pure DOM manipulation with BeerCSS components
 - **State Sync**: Polls backend for running task updates
 - **Event Handling**: User interactions trigger Tauri IPC calls
@@ -165,7 +184,7 @@ The application follows a clean separation of concerns:
 The application uses the One Dark color palette:
 
 | Color      | Hex       | Usage                    |
-|------------|-----------|--------------------------|
+| ---------- | --------- | ------------------------ |
 | Background | `#282c34` | Main background          |
 | Foreground | `#abb2bf` | Text and icons           |
 | Blue       | `#61afef` | Primary, active elements |
@@ -178,18 +197,21 @@ The application uses the One Dark color palette:
 ## Building for Production
 
 ### Linux (AppImage, DEB)
+
 ```bash
 npm run build
 # Output: src-tauri/target/release/bundle/
 ```
 
 ### Windows (MSI, EXE)
+
 ```bash
 npm run build
 # Output: src-tauri\target\release\bundle\
 ```
 
 ### macOS (DMG, APP)
+
 ```bash
 npm run build
 # Output: src-tauri/target/release/bundle/
@@ -198,15 +220,19 @@ npm run build
 ## Troubleshooting
 
 ### "Failed to acquire lock" error
+
 The application state may be corrupted. Delete the data file and restart:
+
 ```bash
 rm ~/.config/time_tracker_tauri_data.json
 ```
 
 ### Build fails on Linux
+
 Ensure all system dependencies are installed (see Prerequisites).
 
 ### Tauri API not available
+
 Make sure `withGlobalTauri` is set to `true` in `src-tauri/tauri.conf.json`.
 
 ## License
