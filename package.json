@@ -1,0 +1,28 @@
+{
+  "name": "time-tracker",
+  "version": "1.0.0",
+  "description": "A Material Design Time Tracker built with Tauri and BeerCSS using the One Dark color scheme",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "tauri": "tauri",
+    "dev": "tauri dev",
+    "build": "tauri build"
+  },
+  "keywords": [
+    "time-tracker",
+    "tauri",
+    "beercss",
+    "material-design",
+    "one-dark",
+    "rust"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@tauri-apps/cli": "^2"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2"
+  }
+}

@@ -1,118 +1,221 @@
-# Material Design Time Tracker
+# Time Tracker
 
-A beautiful task time tracking application built with egui and Material Design 3 principles in Rust.
+A beautiful, modern time tracking application built with **Tauri** (Rust backend) and **BeerCSS** (Material Design 3 frontend), featuring the **One Dark** color scheme.
 
 ## Features
 
-- **✨ Material Design 3 UI**: Modern, clean interface with Material Design styling
-- **📝 Task Input**: Add new tasks by typing the task name and clicking "Add Task" or pressing Enter
-- **⏱️ Running Time Display**: Real-time display of elapsed time for each task in HH:MM:SS format
-- **🎯 Stopwatch Functionality**: Start/Stop buttons for each task to control time tracking
-- **➕ Add Task Button**: Create new tasks with custom names
-- **🔄 Reset Button**: Reset the time for any task (with confirmation dialog)
-- **�️ Delete Button**: Permanently delete tasks with confirmation dialog
-- **�💾 Export to TXT**: Export all tasks and their times to a text file
-- **🌙 Dark/Light Theme**: Toggle between dark and light themes
-- **🎨 Material Cards**: Each task displayed in elevated Material Design cards
-- **🔄 Running Indicators**: Visual spinner for currently running tasks
-- **💿 Data Persistence**: Tasks and their accumulated time are automatically saved and restored when you restart the app
+- **🎨 One Dark Theme**: Beautiful dark theme inspired by the popular Atom editor theme
+- **📱 Material Design 3**: Modern UI following BeerCSS/Material Design 3 guidelines
+- **⏱️ Task Time Tracking**: Start, stop, and track time for multiple tasks
+- **💾 Persistent Storage**: Tasks automatically saved and restored between sessions
+- **📤 Export to TXT**: Export all tasks and times to a text file
+- **🌙 Dark/Light Toggle**: Switch between dark and light themes
+- **🔄 Real-time Updates**: Live time display for running tasks
+- **✅ Confirmation Dialogs**: Prevent accidental resets and deletions
+- **🖥️ Cross-Platform**: Runs on Linux, Windows, and macOS
 
-## Building and Running
+## Tech Stack
 
-### Prerequisites
-- Rust (latest stable version)
-- No additional system dependencies required! (egui handles all UI rendering)
+### Backend (Rust)
+- **Tauri 2.0**: Secure, lightweight desktop app framework
+- **Serde**: JSON serialization for persistence
+- **Chrono**: Date and time handling
 
-### Build
+### Frontend
+- **BeerCSS 4.0**: Material Design 3 CSS framework
+- **Vanilla JavaScript**: No framework dependencies
+- **Material Symbols**: Google Material icons
+
+## Prerequisites
+
+Before building the project, ensure you have the following installed:
+
+1. **Rust** (latest stable version)
+   ```bash
+   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+   ```
+
+2. **Node.js** (v18 or later)
+   ```bash
+   # Using nvm (recommended)
+   nvm install 18
+   nvm use 18
+   ```
+
+3. **System Dependencies** (Linux only)
+   ```bash
+   # Debian/Ubuntu
+   sudo apt update
+   sudo apt install libwebkit2gtk-4.1-dev build-essential curl wget file \
+       libssl-dev libayatana-appindicator3-dev librsvg2-dev
+
+   # Fedora
+   sudo dnf install webkit2gtk4.1-devel openssl-devel curl wget file \
+       libappindicator-gtk3-devel librsvg2-devel
+
+   # Arch Linux
+   sudo pacman -S webkit2gtk-4.1 base-devel curl wget file openssl \
+       appmenu-gtk-module libappindicator-gtk3 librsvg
+   ```
+
+## Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd time-tracker
+   ```
+
+2. **Install Node.js dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Build the application**
+   ```bash
+   npm run build
+   ```
+
+## Development
+
+### Run in development mode
+
 ```bash
-cargo build
+npm run dev
 ```
 
-### Run
-```bash
-cargo run
+This will start the application with hot-reloading enabled for the frontend.
+
+### Project Structure
+
+```
+time-tracker/
+├── src/                        # Frontend source
+│   ├── index.html             # Main HTML with BeerCSS
+│   ├── styles.css             # One Dark theme CSS
+│   ├── app.js                 # JavaScript application logic
+│   ├── beer.min.css           # BeerCSS framework
+│   └── beer.min.js            # BeerCSS JavaScript
+├── src-tauri/                 # Rust backend
+│   ├── src/
+│   │   ├── main.rs           # Entry point
+│   │   ├── lib.rs            # Library with Tauri setup
+│   │   ├── commands.rs       # Tauri IPC commands
+│   │   ├── state.rs          # Application state management
+│   │   ├── task.rs           # Task domain model
+│   │   └── persistence.rs    # File persistence
+│   ├── capabilities/         # Tauri security capabilities
+│   ├── icons/                # Application icons
+│   ├── Cargo.toml            # Rust dependencies
+│   └── tauri.conf.json       # Tauri configuration
+├── package.json              # Node.js configuration
+├── LICENSE                   # MIT License
+└── README.md                 # This file
 ```
 
 ## Usage
 
-1. **Adding Tasks**: 
-   - Type a task name in the input field
-   - Click "Add Task" or press Enter
-   - The task will appear as a Material Design card below
+### Adding Tasks
+1. Enter a task name in the input field
+2. Click "Add Task" or press Enter
+3. The task appears as a card below
 
-2. **Time Tracking**:
-   - Click "Start" to begin tracking time for a task
-   - A spinner appears and the button changes to "Stop"
-   - Click "Stop" to pause time tracking
-   - Time continues to accumulate across multiple start/stop sessions
+### Time Tracking
+- Click the **play button** (▶️) to start tracking time
+- Click the **pause button** (⏸️) to stop tracking
+- Time accumulates across multiple start/stop sessions
 
-3. **Theme Switching**:
-   - Click the sun/moon icon in the top bar to toggle between light and dark themes
-   - The Material Design colors adapt automatically
+### Managing Tasks
+- **Reset**: Click the replay icon to reset a task's time to 00:00:00
+- **Delete**: Click the trash icon to permanently remove a task
+- Both actions require confirmation
 
-4. **Resetting Tasks**:
-   - Click "Reset" next to any task
-   - Confirm the action in the dialog that appears
-   - The task time will be reset to 00:00:00
+### Exporting Data
+1. Click the "Export" button in the header
+2. Choose a location to save the file
+3. Tasks are exported in a readable text format
 
-5. **Deleting Tasks**:
-   - Click the trash icon (🗑️) next to any task
-   - Confirm the deletion in the dialog that appears
-   - The task will be permanently removed and cannot be recovered
+### Theme Toggle
+- Click the sun/moon icon in the header to switch between dark and light themes
 
-6. **Exporting Data**:
-   - Click "Export" in the top bar
-   - Choose a location to save the export file
-   - The file contains all tasks with their total times and creation dates
+## Data Storage
 
-7. **Data Persistence**:
-   - All tasks are automatically saved when you make changes
-   - Running tasks are periodically saved (every 30 seconds) to preserve accumulated time
-   - When you restart the app, all your tasks and their times are restored
-   - Data is saved to your system's config directory (e.g., `~/.config/time_tracker_data.json` on Linux)
+Tasks are automatically saved to:
+- **Linux**: `~/.config/time_tracker_tauri_data.json`
+- **macOS**: `~/Library/Application Support/time_tracker_tauri_data.json`
+- **Windows**: `%APPDATA%\time_tracker_tauri_data.json`
 
-## File Structure
+## Architecture
 
-- `src/main.rs`: Main application code with egui interface and time tracking logic
-- `Cargo.toml`: Project dependencies and metadata
+The application follows a clean separation of concerns:
 
-## Dependencies
+### Backend (Rust)
+- **Domain Layer** (`task.rs`): Task entity with business logic
+- **Persistence Layer** (`persistence.rs`): File I/O operations
+- **State Management** (`state.rs`): Thread-safe application state
+- **API Layer** (`commands.rs`): Tauri commands for frontend communication
 
-- **eframe**: egui framework for cross-platform GUI applications
-- **egui**: Immediate mode GUI library
-- **chrono**: Date and time handling
-- **serde**: Serialization framework
-- **serde_json**: JSON serialization support
-- **rfd**: Native file dialogs
-- **dirs**: Cross-platform config directory support
+### Frontend (JavaScript)
+- **UI Rendering**: Pure DOM manipulation with BeerCSS components
+- **State Sync**: Polls backend for running task updates
+- **Event Handling**: User interactions trigger Tauri IPC calls
 
-## Features Highlights
+## One Dark Color Scheme
 
-### Material Design 3 Elements
-- **Elevated Cards**: Each task is displayed in a Material Design card with subtle shadows
-- **Material Buttons**: Rounded buttons with proper Material Design styling
-- **Color Scheme**: Adaptive colors that work in both light and dark themes
-- **Typography**: Material Design typography with proper text sizing and weights
-- **Spacing**: Consistent Material Design spacing throughout the interface
+The application uses the One Dark color palette:
 
-### Cross-Platform Compatibility
-- Runs on Linux, Windows, and macOS
-- No system UI dependencies - all rendering handled by egui
-- Consistent appearance across all platforms
+| Color      | Hex       | Usage                    |
+|------------|-----------|--------------------------|
+| Background | `#282c34` | Main background          |
+| Foreground | `#abb2bf` | Text and icons           |
+| Blue       | `#61afef` | Primary, active elements |
+| Purple     | `#c678dd` | Secondary accents        |
+| Green      | `#98c379` | Success, start button    |
+| Red        | `#e06c75` | Error, stop/delete       |
+| Yellow     | `#e5c07b` | Warnings                 |
+| Cyan       | `#56b6c2` | Tertiary accents         |
 
-### Performance
-- Efficient immediate mode rendering
-- Smooth 10fps updates for time display
-- Minimal memory usage
-- Fast startup time
+## Building for Production
 
-## Notes
+### Linux (AppImage, DEB)
+```bash
+npm run build
+# Output: src-tauri/target/release/bundle/
+```
 
-- **Data Persistence**: Tasks are automatically saved to `time_tracker_data.json` in your config directory and restored on startup
-- **Auto-Save**: Changes are saved immediately when you add, start/stop, reset, or delete tasks
-- **Periodic Save**: Running tasks are saved every 30 seconds to preserve accumulated time
-- **Cross-Platform**: Data files are stored in the appropriate config directory for each operating system
-- Export files contain task name, total time, running status, and creation timestamp
-- The application updates the display every 100ms for smooth time tracking
-- Confirmation dialogs prevent accidental time resets
-- Material Design principles ensure a consistent, accessible user interface
+### Windows (MSI, EXE)
+```bash
+npm run build
+# Output: src-tauri\target\release\bundle\
+```
+
+### macOS (DMG, APP)
+```bash
+npm run build
+# Output: src-tauri/target/release/bundle/
+```
+
+## Troubleshooting
+
+### "Failed to acquire lock" error
+The application state may be corrupted. Delete the data file and restart:
+```bash
+rm ~/.config/time_tracker_tauri_data.json
+```
+
+### Build fails on Linux
+Ensure all system dependencies are installed (see Prerequisites).
+
+### Tauri API not available
+Make sure `withGlobalTauri` is set to `true` in `src-tauri/tauri.conf.json`.
+
+## License
+
+MIT License - see [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- [Tauri](https://tauri.app/) - Desktop app framework
+- [BeerCSS](https://www.beercss.com/) - Material Design 3 CSS framework
+- [One Dark](https://github.com/atom/atom/tree/master/packages/one-dark-syntax) - Color scheme inspiration
+- [Material Symbols](https://fonts.google.com/icons) - Icon font

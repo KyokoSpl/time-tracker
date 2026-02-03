@@ -1,0 +1,499 @@
+/* One Dark Theme for BeerCSS */
+/* Custom theme overrides using Material Design 3 CSS variables */
+
+:root,
+body.light {
+    /* One Dark Light variant (optional light mode) */
+    --primary: #4078f2;
+    --on-primary: #ffffff;
+    --primary-container: #d4e3ff;
+    --on-primary-container: #001a43;
+    --secondary: #a626a4;
+    --on-secondary: #ffffff;
+    --secondary-container: #ffd6f9;
+    --on-secondary-container: #3b003b;
+    --tertiary: #50a14f;
+    --on-tertiary: #ffffff;
+    --tertiary-container: #c1f4be;
+    --on-tertiary-container: #002204;
+    --error: #e45649;
+    --on-error: #ffffff;
+    --error-container: #ffdad6;
+    --on-error-container: #410002;
+    --background: #fafafa;
+    --on-background: #383a42;
+    --surface: #ffffff;
+    --on-surface: #383a42;
+    --surface-variant: #e5e5e6;
+    --on-surface-variant: #44474d;
+    --outline: #74777f;
+    --outline-variant: #c4c6d0;
+    --shadow: #000000;
+    --scrim: #000000;
+    --inverse-surface: #2f3032;
+    --inverse-on-surface: #f1f0f4;
+    --inverse-primary: #a8c8ff;
+    --surface-dim: #dbd9dd;
+    --surface-bright: #fafafa;
+    --surface-container-lowest: #ffffff;
+    --surface-container-low: #f5f3f7;
+    --surface-container: #efedf1;
+    --surface-container-high: #e9e7ec;
+    --surface-container-highest: #e4e2e6;
+}
+
+body.dark {
+    /* One Dark color scheme */
+    --primary: #61afef;
+    --on-primary: #00315b;
+    --primary-container: #3b5068;
+    --on-primary-container: #c8e6ff;
+    --secondary: #c678dd;
+    --on-secondary: #3e1e4c;
+    --secondary-container: #5a3d68;
+    --on-secondary-container: #f0d6ff;
+    --tertiary: #98c379;
+    --on-tertiary: #1a3d1a;
+    --tertiary-container: #3e5c3e;
+    --on-tertiary-container: #c8f0b8;
+    --error: #e06c75;
+    --on-error: #690005;
+    --error-container: #8b3d42;
+    --on-error-container: #ffdad6;
+    --background: #282c34;
+    --on-background: #abb2bf;
+    --surface: #21252b;
+    --on-surface: #abb2bf;
+    --surface-variant: #3e4451;
+    --on-surface-variant: #9da5b4;
+    --outline: #636d83;
+    --outline-variant: #3e4451;
+    --shadow: #000000;
+    --scrim: #000000;
+    --inverse-surface: #abb2bf;
+    --inverse-on-surface: #282c34;
+    --inverse-primary: #4078f2;
+    --surface-dim: #1b1d23;
+    --surface-bright: #3e4451;
+    --surface-container-lowest: #181a1f;
+    --surface-container-low: #21252b;
+    --surface-container: #282c34;
+    --surface-container-high: #2c313c;
+    --surface-container-highest: #363c4a;
+
+    /* Additional One Dark accent colors */
+    --cyan: #56b6c2;
+    --yellow: #e5c07b;
+    --orange: #d19a66;
+    --magenta: #c678dd;
+}
+
+/* Global styles */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Header styles */
+header.fixed {
+    background: var(--surface-container);
+    border-bottom: 1px solid var(--outline-variant);
+}
+
+header nav {
+    padding: 0.5rem 1rem;
+}
+
+/* Main content area */
+main.responsive {
+    padding-top: 5rem;
+    padding-bottom: 2rem;
+}
+
+/* Task input card */
+article.surface-container {
+    background: var(--surface-container);
+    border: 1px solid var(--outline-variant);
+}
+
+/* Task cards */
+.task-card {
+    background: var(--surface-container-high);
+    border: 1px solid var(--outline-variant);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    transition: all 0.2s ease;
+}
+
+.task-card:hover {
+    background: var(--surface-container-highest);
+    border-color: var(--outline);
+}
+
+.task-card.running {
+    border-left: 4px solid var(--primary);
+    background: var(--primary-container);
+}
+
+.task-card.running:hover {
+    background: var(--primary-container);
+}
+
+/* Task name */
+.task-name {
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--on-surface);
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Time display */
+.time-display {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', 'Monaco', monospace;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary);
+    min-width: 100px;
+    text-align: center;
+}
+
+.task-card.running .time-display {
+    color: var(--on-primary-container);
+}
+
+/* Running indicator */
+.running-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary);
+    font-size: 0.875rem;
+}
+
+.running-indicator i {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Task action buttons */
+.task-actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.task-actions button {
+    min-width: auto;
+}
+
+/* Start/Stop button colors */
+button.start-btn {
+    background: var(--tertiary);
+    color: var(--on-tertiary);
+}
+
+button.start-btn:hover {
+    background: var(--tertiary-container);
+    color: var(--on-tertiary-container);
+}
+
+button.stop-btn {
+    background: var(--error);
+    color: var(--on-error);
+}
+
+button.stop-btn:hover {
+    background: var(--error-container);
+    color: var(--on-error-container);
+}
+
+/* Reset button */
+button.reset-btn {
+    background: transparent;
+    color: var(--on-surface-variant);
+    border: 1px solid var(--outline-variant);
+}
+
+button.reset-btn:hover {
+    background: var(--surface-variant);
+    color: var(--on-surface);
+}
+
+/* Delete button */
+button.delete-btn {
+    background: transparent;
+    color: var(--error);
+}
+
+button.delete-btn:hover {
+    background: var(--error-container);
+    color: var(--on-error-container);
+}
+
+/* Empty state styling */
+#empty-state {
+    padding: 3rem 1rem;
+    text-align: center;
+}
+
+#empty-state i {
+    color: var(--outline);
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+#empty-state h5 {
+    color: var(--on-surface-variant);
+    margin-bottom: 0.5rem;
+}
+
+#empty-state p {
+    color: var(--outline);
+}
+
+/* Dialog styling */
+dialog {
+    background: var(--surface-container-high);
+    border: 1px solid var(--outline-variant);
+    border-radius: 16px;
+    max-width: 400px;
+}
+
+dialog h5 {
+    color: var(--on-surface);
+    margin-bottom: 1rem;
+}
+
+dialog p {
+    color: var(--on-surface-variant);
+}
+
+dialog .error-text {
+    color: var(--error);
+}
+
+/* Snackbar styling */
+.snackbar {
+    background: var(--inverse-surface);
+    color: var(--inverse-on-surface);
+    border-radius: 8px;
+}
+
+.snackbar.error {
+    background: var(--error);
+    color: var(--on-error);
+}
+
+.snackbar.success {
+    background: var(--tertiary);
+    color: var(--on-tertiary);
+}
+
+/* Input field styling */
+.field.border input {
+    background: var(--surface);
+    border-color: var(--outline);
+    color: var(--on-surface);
+}
+
+.field.border input:focus {
+    border-color: var(--primary);
+}
+
+.field.label label {
+    color: var(--on-surface-variant);
+}
+
+.field.label input:focus + label,
+.field.label input:not(:placeholder-shown) + label {
+    color: var(--primary);
+}
+
+/* Button enhancements */
+button.primary {
+    background: var(--primary);
+    color: var(--on-primary);
+}
+
+button.primary:hover {
+    filter: brightness(1.1);
+}
+
+button.error {
+    background: var(--error);
+    color: var(--on-error);
+}
+
+button.transparent {
+    color: var(--on-surface-variant);
+}
+
+button.transparent:hover {
+    background: var(--surface-variant);
+    color: var(--on-surface);
+}
+
+/* Row layouts for task cards */
+.task-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.task-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+    min-width: 200px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .task-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .task-info {
+        justify-content: space-between;
+    }
+
+    .task-actions {
+        justify-content: flex-end;
+    }
+
+    .time-display {
+        font-size: 1rem;
+    }
+}
+
+/* Scrollbar styling for dark theme */
+body.dark ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+body.dark ::-webkit-scrollbar-track {
+    background: var(--surface-container);
+}
+
+body.dark ::-webkit-scrollbar-thumb {
+    background: var(--outline-variant);
+    border-radius: 4px;
+}
+
+body.dark ::-webkit-scrollbar-thumb:hover {
+    background: var(--outline);
+}
+
+/* Progress indicator for running tasks */
+.task-card.running::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
+    background-size: 200% 100%;
+    animation: progress-animation 2s linear infinite;
+}
+
+@keyframes progress-animation {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Task card needs relative positioning for the progress indicator */
+.task-card {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Smooth transitions */
+* {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-duration: 0.15s;
+    transition-timing-function: ease-in-out;
+}
+
+button,
+.task-card {
+    transition-property: all;
+}
+
+/* Focus states for accessibility */
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* Header title icon */
+header button[disabled] {
+    opacity: 1;
+    color: var(--primary);
+}
+
+/* Export button styling */
+#export-btn {
+    color: var(--on-surface-variant);
+}
+
+#export-btn:hover {
+    background: var(--surface-variant);
+    color: var(--on-surface);
+}
+
+/* Theme toggle */
+#theme-toggle {
+    color: var(--on-surface-variant);
+}
+
+#theme-toggle:hover {
+    background: var(--surface-variant);
+    color: var(--on-surface);
+}
+
+/* Add task button */
+#add-task-btn {
+    white-space: nowrap;
+}
+
+/* Chip-like status badges */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 16px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.status-badge.running {
+    background: var(--tertiary-container);
+    color: var(--on-tertiary-container);
+}
+
+.status-badge.stopped {
+    background: var(--surface-variant);
+    color: var(--on-surface-variant);
+}
