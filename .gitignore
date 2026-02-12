@@ -6,11 +6,12 @@ src-tauri/target/
 
 # Tauri build output
 dist/
-
+target/
 # Environment variables
 .env
 .env.local
 .env.*.local
+
 
 # IDE
 .idea/
