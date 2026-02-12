@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "tauri": "tauri",
-    "dev": "tauri dev",
+    "dev": "WEBKIT_DISABLE_DMABUF_RENDERER=1 tauri dev",
     "build": "tauri build"
   },
   "keywords": [

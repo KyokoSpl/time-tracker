@@ -18,6 +18,15 @@ use state::AppState;
 /// Returns an error if the Tauri application fails to initialize or run.
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
+    // Fix WebKitGTK DMA-BUF renderer crash on Wayland
+    // (Gdk-Message: Error 71 (Protocol error) dispatching to Wayland display)
+    #[cfg(target_os = "linux")]
+    {
+        if std::env::var("WEBKIT_DISABLE_DMABUF_RENDERER").is_err() {
+            std::env::set_var("WEBKIT_DISABLE_DMABUF_RENDERER", "1");
+        }
+    }
+
     tauri::Builder::default()
         .plugin(tauri_plugin_shell::init())
         .plugin(tauri_plugin_dialog::init())
